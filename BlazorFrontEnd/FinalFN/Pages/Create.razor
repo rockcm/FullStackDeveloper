@@ -1,0 +1,47 @@
+﻿@page "/create"
+@inject SkinService SkinService
+@using FinalFN.Data
+@using FinalFN.Services
+@inject NavigationManager NavigationManager
+
+
+
+
+
+<h3>Create New Skin</h3>
+
+<form @onsubmit="CreateUserSkin">
+
+    <label for="Id">Id:</label>
+    <input type="text" id="ID" @bind="newSkin.Id" required />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" @bind="newSkin.Name" required />
+
+    <label for="description">Description:</label>
+    <textarea id="description" @bind="newSkin.Description" required></textarea>
+
+    <label for="weaponName">Weapon:</label>
+    <input type="text" id="weaponName" @bind="newSkin.WeaponName" required />
+
+    <label for="rarityName">Rarity:</label>
+    <input type="text" id="rarityName" @bind="newSkin.RarityName" required />
+
+    <label for="pictureUrl">Picture URL:</label>
+    <input type="text" id="pictureUrl" @bind="newSkin.PictureUrl" required />
+
+   
+
+    <button type="submit">Create Skin</button>
+</form>
+
+@code {
+    private Skin newSkin = new Skin();
+
+    private async Task CreateUserSkin()
+    {
+        await SkinService.AddUserSkin(newSkin);
+       
+        NavigationManager.NavigateTo("/skins");
+    }
+}

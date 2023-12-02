@@ -1,0 +1,126 @@
+﻿@page "/user-skins"
+@inject SkinService SkinService
+@using FinalFN.Data
+@using FinalFN.Services
+
+
+
+<h3>User Skins</h3>
+
+
+@if (userSkins == null)
+{
+    <p>Loading...</p>
+}
+else if (userSkins.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Weapon</th>
+                <th>Rarity</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userSkin in userSkins)
+            {
+                <tr>
+                    <td>@userSkin.Id</td>
+                    <td>@userSkin.Name</td>
+                    <td>@userSkin.Description</td>
+                    <td>@userSkin.WeaponName</td>
+                    <td>@userSkin.RarityName</td>
+                    <td><img src="@userSkin.PictureUrl" alt="User Skin Image" style="max-width: 100px; max-height: 100px;" /></td>
+                    <td>
+                        
+                        <button class="btn btn-danger" @onclick="() => DeleteUserSkin(userSkin.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+   
+}
+else
+{
+    <p>No user-added skins available.</p>
+}
+
+@code {
+    private List<Skin> userSkins;
+    private SkinUpdate updatedUserSkin = new SkinUpdate();
+    private bool isEditUserSkinModalOpen = false;
+    private int newSkinId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userSkins = await SkinService.GetUserSkins();
+    }
+
+    private void EditUserSkin(Skin userSkin) 
+    {
+        // Set up the modal for editing
+        updatedUserSkin = new SkinUpdate
+            {
+                Id = userSkin.Id,
+                Name = userSkin.Name,
+                Description = userSkin.Description,
+                WeaponName = userSkin.WeaponName,
+                RarityName = userSkin.RarityName,
+                PictureUrl = userSkin.PictureUrl
+            };
+        isEditUserSkinModalOpen = true;
+    }
+
+    private async Task UpdateUserSkin()
+    {
+       
+        await SkinService.UpdateUserSkin(newSkinId, updatedUserSkin);
+
+       
+        isEditUserSkinModalOpen = false;
+
+        // Refresh the user skins list
+        userSkins = await SkinService.GetUserSkins();
+    }
+
+    private async Task DeleteUserSkin(int userSkinId)
+    {
+        // Call the service to delete the user skin by ID
+        await SkinService.DeleteUserSkin(userSkinId);
+
+        // Refresh the user skins list
+        userSkins = await SkinService.GetUserSkins();
+    }
+
+    private void CloseEditUserSkinModal()
+    {
+        // Close the edit modal NOT USED
+        isEditUserSkinModalOpen = false;
+    }
+
+    private async Task AddUserSkinById()
+    {
+        // Call the service to get the skin by ID
+        var newSkin = await SkinService.GetSkinById(newSkinId);
+
+        if (newSkin != null)
+        {
+            // Call the service to add the skin to the user skins
+            await SkinService.AddUserSkin(newSkin);
+
+            // Refresh the user skins list
+            userSkins = await SkinService.GetUserSkins();
+        }
+        else
+        {
+            
+        }
+    }
+}

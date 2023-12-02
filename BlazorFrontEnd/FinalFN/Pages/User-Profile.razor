@@ -1,0 +1,64 @@
+﻿@page "/user-profile"
+@inject SkinService SkinService
+@inject UserService UserService
+@using FinalFN.Data
+@using FinalFN.Services
+@inject NavigationManager NavigationManager
+
+<!-- NOT IMPLEMENTED RIGHT YET-->
+<!-- NOT IMPLEMENTED RIGHT YET-->
+
+<h3>User Profiles</h3>
+
+@if (userProfiles == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userProfile in userProfiles)
+            {
+                <tr>
+                    <td>@userProfile.UserId</td>
+                    <td>@userProfile.Username</td>
+                    <td>@userProfile.Email</td>
+                    <td><button class="btn btn-primary" @onclick="() => ViewUserProfile(userProfile.UserId)">View</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+
+    private List<UserProfile> userProfiles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            userProfiles = await UserService.GetUserProfiles();
+        }
+        catch (Exception ex)
+        {
+           
+            Console.WriteLine($"Error fetching user profiles: {ex.Message}");
+        }
+    }
+
+    private void ViewUserProfile(int userId)
+    {
+        NavigationManager.NavigateTo($"/user-profiles/{userId}");
+    }
+}

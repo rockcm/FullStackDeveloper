@@ -1,0 +1,180 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+@inject SkinService SkinService
+@using FinalFN.Services
+@using FinalFN.Data
+
+
+<div class="container">
+    <header class="header">
+        <h1 class="title">CS:GO Skin Management System</h1>
+    </header>
+
+    <section class="main-section">
+        <div class="main-content">
+            <p class="subtitle">Elevate Your Gaming Experience</p>
+            <p class="description">Welcome to a revolutionary Skin Management System designed to enhance your Counter-Strike: Global Offensive (CS:GO) gaming journey. Explore, manage, and personalize your in-game skins with ease.</p>
+
+            <div class="featured-skins">
+                <p class="featured-skins-title">Featured Skins:</p>
+                @foreach (var featuredSkin in featuredSkins)
+                {
+                    <div class="skin-card">
+                        <img src="@featuredSkin.PictureUrl" alt="@featuredSkin.Name" class="skin-image" />
+                        <p class="skin-name">@featuredSkin.Name</p>
+                    </div>
+                }
+            </div>
+
+            <div class="cta-buttons">
+                <button class="primary-cta" @onclick="NavigateToUserSkins">Your Skins</button>
+                
+                <button class="secondary-cta" @onclick="NavigateToSkins">All Skins</button>
+                
+                <button class="secondary-cta" @onclick="NavigateToAddUserSkins">Add User Skins</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+@code {
+    private List<Skin> featuredSkins = new List<Skin>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Fetch all skins with "★" in the name from the SkinService
+        var allSkins = await SkinService.GetAllSkins();
+
+        // Randomly select three featured skins
+        var random = new Random();
+        featuredSkins = allSkins
+            .Where(s => s.Name?.Contains("★") == true)
+            .OrderBy(_ => random.Next())
+            .Take(3)
+            .ToList();
+    }
+
+    private void NavigateToUserSkins()
+    {
+        NavigationManager.NavigateTo("/user-skins");
+    }
+
+    private void NavigateToSkins()
+    {
+        NavigationManager.NavigateTo("/skins");
+    }
+
+    private void NavigateToAddUserSkins()
+    {
+        NavigationManager.NavigateTo("/add-user-skins");
+    }
+}
+
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Header Styles */
+    .header {
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .title {
+        font-size: 2rem;
+        color: #007bff;
+    }
+
+    /* Main Section Styles */
+    .main-section {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin: 2rem 0;
+        padding: 2rem;
+    }
+
+    .main-content {
+        text-align: center;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+        color: #6c757d;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        color: #495057;
+        margin-top: 1rem;
+    }
+
+    /* Random Skins Styles */
+    .random-skins {
+        margin-top: 2rem;
+    }
+
+    .random-skins-title {
+        font-size: 1.3rem;
+        color: #343a40;
+        margin-bottom: 1rem;
+    }
+
+    .skin-card {
+        margin-bottom: 1rem;
+    }
+
+    .skin-image {
+        width: 50%;
+        border-radius: 5px;
+    }
+
+    .skin-name {
+        font-size: 1rem;
+        color: #495057;
+        margin-top: 0.5rem;
+    }
+
+    /* Call-to-Action Buttons Styles */
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .primary-cta,
+    .secondary-cta {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        text-decoration: none;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .primary-cta {
+        background-color: #007bff;
+        margin-right: 1rem;
+    }
+
+    .secondary-cta {
+        background-color: #6c757d;
+    }
+
+        .primary-cta:hover,
+        .secondary-cta:hover {
+            background-color: #0056b3;
+        }
+</style>

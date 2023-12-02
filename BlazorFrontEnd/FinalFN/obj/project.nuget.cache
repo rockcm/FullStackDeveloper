@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "02EPtO2Jm6oviwLtQJfMCh/noTfuHvtVtLgdYteumPNzuL3n7iq1MFeW/gfJYMjmkldlAz2pPgMhX+CT7ilhYg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Fatal\\OneDrive\\Desktop\\updated\\working-master\\FinalFN\\FinalFN.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Fatal\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,119 @@
+﻿@page "/add-user-skins"
+@inject SkinService SkinService
+@using FinalFN.Data
+@using FinalFN.Services
+@inject NavigationManager NavigationManager
+
+<h3>Add User Skins</h3>
+
+<!-- Input field for searching skins -->
+<div class="form-group">
+    <label for="searchSkin">Search Skin:</label>
+    <input type="text" id="searchSkin" class="form-control" @bind="searchTerm" />
+    <button class="btn btn-primary" @onclick="SearchSkins">Search</button>
+</div>
+
+<!-- Display search results -->
+@if (searchResults != null && searchResults.Any())
+{
+    <div>
+        <h4>Search Results:</h4>
+        <ul>
+            @foreach (var result in searchResults)
+            {
+                <li>
+                    <p>Name: @result.Name</p>
+                    <p>Description: @result.Description</p>
+                    <button class="btn btn-success" @onclick="() => AddUserSkin(result)">Add User Skin</button>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+<!-- Dropdown for selecting skins -->
+<div class="form-group">
+    <label for="selectedSkin">Select Skin:</label>
+    <select id="selectedSkin" class="form-control" @onchange="UpdateSelectedSkin">
+        <option value="">-- Select Skin --</option>
+        @foreach (var skin in skins)
+        {
+            <option value="@skin.Id.ToString()">@skin.Name</option>
+        }
+    </select>
+    <button class="btn btn-success" @onclick="AddUserSkin2">Add User Skin</button>
+</div>
+
+<!-- Display selected skin details -->
+@if (selectedSkin != null)
+{
+    <div>
+        <h4>Selected Skin Details:</h4>
+        <p>Name: @selectedSkin.Name</p>
+        <p>Description: @selectedSkin.Description</p>
+        <button class="btn btn-success" @onclick="() => AddUserSkin(selectedSkin)">Add User Skin</button>
+    </div>
+}
+
+@code {
+    private List<Skin> skins = new List<Skin>();
+    private List<Skin> searchResults = new List<Skin>();
+    private Skin selectedSkin;
+    private string searchTerm;
+
+    protected override async Task OnInitializedAsync()
+    {
+        skins = await SkinService.GetAllSkins();
+    }
+
+    // Search for skins based on the entered search term
+    private void SearchSkins()
+    {
+        searchResults = string.IsNullOrEmpty(searchTerm)
+            ? new List<Skin>()
+            : skins.Where(s => s.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    // Add the selected skin to user skins
+    private async Task AddUserSkin(Skin skin)
+    {
+        // Call the service to add the selected skin to user skins
+        await SkinService.AddUserSkin2(skin);
+
+        // Navigate back to the user skins page
+        NavigationManager.NavigateTo("/user-skins");
+    }
+
+    // Update the selected skin when the dropdown value changes
+    private void UpdateSelectedSkin(ChangeEventArgs e)
+    {
+        var selectedId = e.Value?.ToString();
+        if (!string.IsNullOrEmpty(selectedId))
+        {
+            var selectedIdInt = int.Parse(selectedId);
+            selectedSkin = skins.FirstOrDefault(s => s.Id == selectedIdInt);
+        }
+        else
+        {
+            selectedSkin = null;
+        }
+    }
+
+    // Add user skin using the original dropdown
+    private async Task AddUserSkin2()
+    {
+        if (selectedSkin != null)
+        {
+            // Call the service to add the selected skin to user skins
+            await SkinService.AddUserSkin2(selectedSkin);
+
+            // Navigate back to the user skins page
+            NavigationManager.NavigateTo("/user-skins");
+        }
+        else
+        {
+            // Handle the case where no skin is selected
+            Console.WriteLine("Please select a skin.");
+        }
+    }
+}

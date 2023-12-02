@@ -1,0 +1,92 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = FinalFN
+build_property.RootNamespace = FinalFN
+build_property.ProjectDir = C:\Users\Fatal\OneDrive\Desktop\updated\working-master\FinalFN\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Fatal\OneDrive\Desktop\updated\working-master\FinalFN
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Add-User-Skins.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkLVVzZXItU2tpbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Delete.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVsZXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Search.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VhcmNoLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/SkinPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2tpblBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/User-Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlci1Qcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/User-Skins.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlci1Ta2lucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/UserProfileDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclByb2ZpbGVEZXRhaWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/UserProfileEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclByb2ZpbGVFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-whqoqrel74
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-635aamz3co
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Fatal/OneDrive/Desktop/updated/working-master/FinalFN/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

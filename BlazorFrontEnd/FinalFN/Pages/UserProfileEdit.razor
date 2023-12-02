@@ -1,0 +1,53 @@
+﻿@page "/user-profiles/{UserId:int}/edit"
+@inject UserService UserService
+@inject NavigationManager NavigationManager
+@using FinalFN.Data
+@using FinalFN.Services
+
+<!-- NOT IMPLEMENTED RIGHT YET-->
+<!-- NOT IMPLEMENTED RIGHT YET-->
+
+<h3>Edit User Profile</h3>
+
+@if (userProfile == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="userProfile" OnValidSubmit="UpdateUserProfile">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <InputText id="Username" @bind-Value="userProfile.Username" class="form-control" />
+            <ValidationMessage For="@(() => userProfile.Username)" />
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <InputText id="Email" @bind-Value="userProfile.Email" class="form-control" />
+            <ValidationMessage For="@(() => userProfile.Email)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int UserId { get; set; }
+
+    private UserProfile userProfile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userProfile = await UserService.GetUserProfile(UserId);
+    }
+
+    private async Task UpdateUserProfile()
+    {
+        await UserService.UpdateUserProfile(userProfile);
+        NavigationManager.NavigateTo($"/user-profiles/{UserId}");
+    }
+}

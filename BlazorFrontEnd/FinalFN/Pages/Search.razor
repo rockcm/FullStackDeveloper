@@ -1,0 +1,54 @@
+﻿@page "/search"
+@inject SkinService SkinService
+@using FinalFN.Data
+@using FinalFN.Services
+@inject NavigationManager NavigationManager
+
+<h3>Search Skins</h3>
+
+<!-- Search input and button -->
+<div class="form-group">
+    <label for="searchSkin">Search Skin:</label>
+    <input type="text" id="searchSkin" class="form-control" @bind="searchTerm" />
+    <button class="btn btn-primary" @onclick="SearchSkins">Search</button>
+</div>
+
+
+
+<div>
+    <h4>Search Results:</h4>
+    <ul>
+        @foreach (var result in searchResults)
+        {
+            <li>
+                <p>ID: @result.Id</p>
+                <p>Name: @result.Name</p>
+                <p>Description: @result.Description</p>
+
+            </li>
+        }
+    </ul>
+</div>
+
+
+@code {
+   
+    private List<Skin> skins = new List<Skin>();
+    private List<Skin> searchResults = new List<Skin>();
+    private Skin selectedSkin;
+    private string searchTerm;
+
+    protected override async Task OnInitializedAsync()
+    {
+        skins = await SkinService.GetAllSkins();
+    }
+
+    // Search for skins based on the entered search term
+    private void SearchSkins()
+    {
+        searchResults = string.IsNullOrEmpty(searchTerm)
+            ? new List<Skin>()
+            : skins.Where(s => s.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+}
