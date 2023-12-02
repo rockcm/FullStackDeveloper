@@ -1,3 +1,5 @@
+# FullStackDeveloper
+
 Project Description: Skin Management System
 
 Overview: The Skin Management System is a comprehensive web application designed to facilitate the management of in-game skins for a Counter-Strike: Global Offensive (CS:GO) environment. The system is built using the FastAPI framework, ensuring efficiency, reliability, and seamless integration with the underlying data structures.
