@@ -1,12 +1,10 @@
-﻿@page "/skins"
+@page "/skins"
 @inject SkinService SkinService
 @using FinalFN.Data
 @using FinalFN.Services
 
 <h3>Skins List</h3>
-<br/>
-<h6>Must refresh after updating or deleting, this is to allow mulitple changes before reloading.</h6>
-
+<br />
 
 @if (skins == null)
 {
@@ -50,7 +48,6 @@ else
     <p>No skins available.</p>
 }
 
-<!-- Modal for editing a skin -->
 @if (isEditModalOpen)
 {
     <div class="modal" tabindex="-1" role="dialog" style="display: block;">
@@ -63,32 +60,26 @@ else
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Form for editing skin properties -->
                     <div class="form-group">
                         <label for="updatedName">Name:</label>
                         <input id="updatedName" class="form-control" @bind="updatedSkin.Name" />
                     </div>
-
                     <div class="form-group">
                         <label for="updatedDescription">Description:</label>
                         <input id="updatedDescription" class="form-control" @bind="updatedSkin.Description" />
                     </div>
-
                     <div class="form-group">
                         <label for="updatedWeaponName">Weapon:</label>
                         <input id="updatedWeaponName" class="form-control" @bind="updatedSkin.WeaponName" />
                     </div>
-
                     <div class="form-group">
                         <label for="updatedRarityName">Rarity:</label>
                         <input id="updatedRarityName" class="form-control" @bind="updatedSkin.RarityName" />
                     </div>
-
                     <div class="form-group">
                         <label for="updatedPictureUrl">Picture URL:</label>
                         <input id="updatedPictureUrl" class="form-control" @bind="updatedSkin.PictureUrl" />
                     </div>
-
                     <button class="btn btn-primary" @onclick="UpdateSkin">Update</button>
                 </div>
             </div>
@@ -103,12 +94,18 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        SkinService.OnChange += StateHasChanged;
+        await LoadSkins();
+    }
+
+    private async Task LoadSkins()
+    {
         skins = await SkinService.GetAllSkins();
+        StateHasChanged();
     }
 
     private void EditSkin(Skin skin)
     {
-        // Open the edit modal and set the initial values
         isEditModalOpen = true;
         updatedSkin = new SkinUpdate
             {
@@ -123,38 +120,34 @@ else
 
     private async Task UpdateSkin()
     {
-        // Call the service to update the skin
         var updatedSkinResult = await SkinService.UpdateSkin(updatedSkin.Id.Value, updatedSkin);
 
         if (updatedSkinResult != null)
         {
-            
             isEditModalOpen = false;
-        }
-        else
-        {
-            // Handle the update error
+            await LoadSkins();
         }
     }
 
     private async Task DeleteSkin(int skinId)
     {
-        
         var deletedSkin = await SkinService.DeleteSkin(skinId);
+        StateHasChanged();
 
         if (deletedSkin != null)
         {
-           
-        }
-        else
-        {
-           
+            await LoadSkins();
         }
     }
 
-    private void CloseEditModal()
+    private async Task CloseEditModal()
     {
-        // Close the edit modal without saving changes
         isEditModalOpen = false;
+        await LoadSkins();
+    }
+
+    public void Dispose()
+    {
+        SkinService.OnChange -= StateHasChanged;
     }
 }
