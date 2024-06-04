@@ -1,4 +1,4 @@
-﻿@page "/search"
+@page "/search"
 @inject SkinService SkinService
 @using FinalFN.Data
 @using FinalFN.Services
@@ -25,6 +25,7 @@
                 <p>Name: @result.Name</p>
                 <p>Description: @result.Description</p>
                 <p><img src="@result.PictureUrl" alt="Skin Image" class="img-thumbnail" /></p>
+                <button class="btn btn-danger btn-sm" @onclick="() => DeleteSkin(result.Id)">Delete</button>
 
             </li>
         }
@@ -51,5 +52,23 @@
             ? new List<Skin>()
             : skins.Where(s => s.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
     }
+
+    private async Task DeleteSkin(int skinId)
+    {
+        var deletedSkin = await SkinService.DeleteSkin(skinId);
+        StateHasChanged();
+
+        if (deletedSkin != null)
+        {
+            await LoadSkins();
+        }
+    }
+
+    private async Task LoadSkins()
+    {
+        skins = await SkinService.GetAllSkins();
+        StateHasChanged();
+    }
+
 
 }
