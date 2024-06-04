@@ -94,7 +94,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        SkinService.OnChange += StateHasChanged;
+     
         await LoadSkins();
     }
 
@@ -146,8 +146,5 @@ else
         await LoadSkins();
     }
 
-    public void Dispose()
-    {
-        SkinService.OnChange -= StateHasChanged;
-    }
+
 }
